@@ -1,9 +1,7 @@
 from django.db import models
-# Create your models here.
-# ORM 创建数据库表
-# 查询一个表  Table_name.objects.all()
 
-# class = table user_app_project
+'''
+项目表
 '''
 class Project(models.Model):
     name = models.CharField("名称",max_length=50,blank=False,default="")
@@ -14,6 +12,9 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+'''
+模块表
+ '''
 class Module(models.Model):
     project = models.ForeignKey(Project,on_delete=models.CASCADE)
     name = models.CharField("名称",max_length=100,blank=False,default="")
@@ -22,4 +23,3 @@ class Module(models.Model):
 
     def __str__(self):
         return self.name
-'''

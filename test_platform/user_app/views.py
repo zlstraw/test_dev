@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 
-from user_app.models import Project,Module
+
+#from user_app.models import Project,Module
 # 首页
 def index(request):
     return render(request,"index.html")
@@ -25,21 +25,11 @@ def login_action(request):
                 # 记录用户登陆状态
                 auth.login(request,user)
                 request.session['user1'] = username
-                return HttpResponseRedirect('/project_manage/')
+                return HttpResponseRedirect('/manage/project_manage/')
             else:
                 return render(request,"index.html",{"error":"用户名或密码错误"})
 
-# 判断用户是否登陆
-@login_required
-def project_manage(request):
-    username = request.session.get('user1','')  # 读取浏览器session
-    # 将数据库数据展示出来
-    project_all = Project.objects.all()
-    print(project_all)
-    return render(request,"project_manage.html",{
-        "user": username,
-        "projects": project_all
-    })
+
 
 
 
