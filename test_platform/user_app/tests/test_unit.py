@@ -74,3 +74,18 @@ class loginTest(TestCase):
         login_data = {"username":"test01", "password":"111111"}
         response = self.client.post('/login_action/', data = login_data)
         self.assertEqual(response.status_code,302)
+
+
+
+class logoutTest(TestCase):
+
+    def setUp(self):
+        User.objects.create_user("test01","aaa@email.com","111")
+        self.client = Client()
+        login_data = {"username":"test01", "password":"111"}
+        response = self.client.post('/login_action/', data = login_data)
+
+    def test_logout(self):
+        response = self.client.post('/logout/')
+        login_html = response.content.decode("utf-8")
+        self.assertEqual(response.status_code,302)

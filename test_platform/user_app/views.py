@@ -29,11 +29,11 @@ def login_action(request):
             else:
                 return render(request,"index.html",{"error":"用户名或密码错误"})
 
-
-
-
+    else:
+        return render(request,"index.html")
 
 # 退出登录
+#@login_required
 def logout(request):
     auth.logout(request)   # 清除用户的登陆状态
     response = HttpResponseRedirect('/')
